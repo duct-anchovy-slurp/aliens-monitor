@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Aliens Monitor 👽</title>
+</head>
+<body>
+  <h1>👽 aliens.gov Status</h1>
+  <h2 id="status">Checking...</h2>
+  <p id="details"></p>
+
+  <script>
+    fetch("status.json")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("status").innerText =
+          data.is_up ? "🟢 LIVE" : "🔴 DOWN";
+
+        document.getElementById("details").innerText =
+          `Last Checked: ${data.timestamp} | Code: ${data.status_code}`;
+      })
+      .catch(() => {
+        document.getElementById("status").innerText = "⚠️ No data yet";
+      });
+  </script>
+</body>
+</html>
